@@ -74,10 +74,11 @@ Slava Ukraini! ❤ Brime Team, USA.<br>
 </div>
 </div>
     <script>
-        async function nextVideo(){
+        async function nextVideo(e){
+              if(e) {console.log(e)}
               let res = await axios.get('https://g604d290ad37c61-brime.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/api/videos')
               player.prependVideoOnQueue(`https://${res.data.items[0].url}`)
-              player.playNextVideoOnQueue()
+//               player.playNextVideoOnQueue()
            }
         var player = new Clappr.Player({
                 plugins: [QueuePlugin],
@@ -92,7 +93,7 @@ Slava Ukraini! ❤ Brime Team, USA.<br>
                 parentId: '#player',
                 mute: false,
                 events: {
-                    onError: function() { nextVideo() },
+                    onError: function() { nextVideo(e) },
                     onEnded: function() { nextVideo() }
                 }
             });
