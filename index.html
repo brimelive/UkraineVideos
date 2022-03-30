@@ -20,9 +20,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
         integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/clappr-queue-plugin@latest/dist/clappr-queue-plugin.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@clappr/player@latest/dist/clappr.min.js"></script>
+<!--     <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/clappr-queue-plugin@latest/dist/clappr-queue-plugin.min.js"></script> -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -75,18 +75,26 @@ Slava Ukraini! ❤ Brime Team, USA.<br>
 </div>
     <script>
         async function nextVideo(){
+              console.log('Loading next video')
+              // player.popVideoFromQueue()
               let res = await axios.get('https://g604d290ad37c61-brime.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/api/videos')
-              player.prependVideoOnQueue(`https://${res.data.items[0].url}`)
-//               player.playNextVideoOnQueue()
+              let s = encodeURIComponent('https://'+ res.data.items[0].url)
+              let u = `https://twitter-video.brime.tv/video/${s}`
+              player.configure({
+        source: u,
+        autoPlay: true,
+      });
+              // player.prependVideoOnQueue(`https://${res.data.items[0].url}`)
+              // player.playNextVideoOnQueue()
            }
         var player = new Clappr.Player({
-                plugins: [QueuePlugin],
-                source: '',
-                queue: {
-                    nextVideos: [
-                    ],
-                    autoPlayNextVideo: true
-                },
+                // plugins: [QueuePlugin],
+                source: 'https://video.twimg.com/ext_tw_video/1497089835076825089/pu/vid/1280x720/RqvIdB-kIRtusVFy.mp4',
+                // queue: {
+                //     nextVideos: [
+                //     ],
+                //     autoPlayNextVideo: false
+                // },
                 height: '65vh',
                 width: '100%',
                 parentId: '#player',
@@ -103,9 +111,10 @@ Slava Ukraini! ❤ Brime Team, USA.<br>
                 navigator.clipboard.writeText(value._src);
                 alert("Copied the link");
             }
-//             setTimeout(function(){
-//                 nextVideo()
-//             }, 100);
+            // setTimeout(function(){
+            //     console.log('Set first Video')
+            //     nextVideo()
+            // }, 100);
            
     </script>
 </body>
