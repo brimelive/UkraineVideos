@@ -93,7 +93,7 @@ Slava Ukraini! ❤ Brime Team, USA.<br>
                 mute: false,
                 events: {
                     onError: function() { nextVideo() },
-                    //onEnded: function() { nextVideo() }
+                    onEnded: function() { nextVideo() }
                 }
             });
 
@@ -103,9 +103,9 @@ Slava Ukraini! ❤ Brime Team, USA.<br>
                 navigator.clipboard.writeText(value._src);
                 alert("Copied the link");
             }
-            setTimeout(function(){
-                nextVideo()
-            }, 100);
+//             setTimeout(function(){
+//                 nextVideo()
+//             }, 100);
            
     </script>
 </body>
